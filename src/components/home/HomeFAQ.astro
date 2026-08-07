@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+
+const faqs = await getCollection('faqs');
+const publishedFaqs = faqs
+  .filter((f) => f.data.status === 'published')
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="faq-section section">
+  <div class="container">
+    <div class="faq-header">
+      <span class="eyebrow">Tanya Jawab</span>
+      <h2 class="faq-title">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+      <p class="faq-subtitle">
+        Jawaban atas pertanyaan umum seputar program, metode, dan alur pendaftaran Belajar Islam Dasar.
+      </p>
+    </div>
+
+    <!-- Native Semantic HTML Details/Summary (Zero JS Hydration) -->
+    <div class="faq-list">
+      {publishedFaqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.data.question}</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.data.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="faq-footer">
+      <p class="faq-more">
+        Punya pertanyaan lain seputar pendaftaran? <a href="/faq" class="link-editorial">Lihat Pusat Bantuan & FAQ Selengkapnya →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-header {
+    max-width: var(--max-width-reading);
+    margin-bottom: var(--space-12);
+  }
+
+  .faq-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .faq-subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 840px;
+  }
+
+  .faq-item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-6);
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--color-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    font-size: var(--font-size-xl);
+    font-weight: 400;
+    color: var(--color-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    color: var(--color-primary);
+  }
+
+  .faq-answer {
+    padding-inline: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+
+  .faq-answer p {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: 0;
+  }
+
+  .faq-footer {
+    margin-top: var(--space-10);
+  }
+
+  .faq-more {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    margin-bottom: 0;
+  }
+</style>

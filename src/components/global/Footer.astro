@@ -1,0 +1,204 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-top grid-editorial">
+      <!-- Brand & Mission Column -->
+      <div class="footer-brand">
+        <a href="/" class="brand-link" aria-label="Tarbiyah Sunnah Learning — Halaman Utama">
+          <span class="brand-name">Tarbiyah Sunnah Learning</span>
+          <span class="brand-tagline">Belajar Islam Dasar (BID)</span>
+        </a>
+        <p class="brand-desc">
+          Program pembelajaran Islam dasar yang terstruktur, bertahap, dan terarah untuk membantu masyarakat membangun fondasi agama yang utuh dan komprehensif.
+        </p>
+      </div>
+
+      <!-- Footer Nav Columns -->
+      <div class="footer-nav-group">
+        <h4 class="footer-heading">Program</h4>
+        <ul class="footer-links">
+          <li><a href="/program">Tentang BID</a></li>
+          <li><a href="/program/kurikulum">Kurikulum & Silabus</a></li>
+          <li><a href="/pendaftaran">Pendaftaran BID</a></li>
+          <li><a href="/biaya">Informasi Biaya</a></li>
+          <li><a href="/jadwal">Jadwal Belajar</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-nav-group">
+        <h4 class="footer-heading">Kelembagaan</h4>
+        <ul class="footer-links">
+          <li><a href="/tentang">Profil TSL</a></li>
+          <li><a href="/pengajar">Pengajar & Asatidzah</a></li>
+          <li><a href="/kontak">Kontak</a></li>
+          <li><a href="/bantuan">Pusat Bantuan</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-nav-group">
+        <h4 class="footer-heading">Informasi & Portal</h4>
+        <ul class="footer-links">
+          <li><a href="/informasi">Pengumuman & Info</a></li>
+          <li><a href="/artikel">Artikel Pembelajaran</a></li>
+          <li><a href="/faq">Tanya Jawab (FAQ)</a></li>
+          <li>
+            <a href="https://kelas.tslbelajarislam.id" target="_blank" rel="noopener noreferrer">
+              Masuk Portal Belajar ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        © {currentYear} Tarbiyah Sunnah Learning. Hak Cipta Dilindungi.
+      </p>
+      <ul class="legal-links">
+        <li><a href="/privacy">Kebijakan Privasi</a></li>
+        <li><a href="/terms">Syarat & Ketentuan</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-8);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-brand {
+    grid-column: span 12;
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .footer-brand {
+      grid-column: span 4;
+      margin-bottom: 0;
+    }
+  }
+
+  .brand-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    margin-bottom: var(--space-3);
+  }
+
+  .brand-name {
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .brand-tagline {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+
+  .brand-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    line-height: var(--line-height-body);
+    max-width: 320px;
+  }
+
+  .footer-nav-group {
+    grid-column: span 12;
+  }
+
+  @media (min-width: 576px) {
+    .footer-nav-group {
+      grid-column: span 4;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .footer-nav-group {
+      grid-column: span 2;
+
+      &:nth-child(2) {
+        grid-column-start: 6;
+      }
+    }
+  }
+
+  .footer-heading {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer-links a {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+    }
+  }
+
+  .copyright {
+    font-size: var(--font-size-xs);
+    color: var(--color-muted);
+    margin-bottom: 0;
+  }
+
+  .legal-links {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .legal-links a {
+    font-size: var(--font-size-xs);
+    color: var(--color-muted);
+    transition: color 0.2s ease;
+  }
+
+  .legal-links a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+</style>

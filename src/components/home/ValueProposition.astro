@@ -1,0 +1,122 @@
+---
+const pillars = [
+  {
+    number: "01",
+    title: "Materi Terstruktur",
+    description: "Kurikulum dirancang khusus mulai dari ilmu paling mendasar sehingga peserta memiliki gambaran peta ilmu yang rapi."
+  },
+  {
+    number: "02",
+    title: "Alur Pembelajaran Bertahap",
+    description: "Setiap topik dipelajari secara berurutan tanpa melompati bab kunci, memudahkan pemahaman keterkaitan antarilmu."
+  },
+  {
+    number: "03",
+    title: "Fokus pada Fondasi Syariat",
+    description: "Memperkuat pemahaman tauhid, fikih ibadah harian, dan adab islami sebagai pijakan sebelum melangkah ke ilmu lanjutan."
+  },
+  {
+    number: "04",
+    title: "Pendampingan & Evaluasi Terarah",
+    description: "Progres belajar didampingi dengan modul teruji dan latihan berkala untuk memastikan pemahaman yang benar."
+  }
+];
+---
+
+<section class="value-section section">
+  <div class="container">
+    <!-- Header Area -->
+    <div class="value-header">
+      <span class="eyebrow">Mengapa BID</span>
+      <h2 class="value-title">Bagaimana BID Menjawab Kebutuhan Belajar Anda</h2>
+      <p class="value-subtitle">
+        BID disusun untuk memberikan alur belajar ilmu dasar Islam yang jelas, terukur, dan dapat dipertanggungjawabkan.
+      </p>
+    </div>
+
+    <!-- Editorial List Layout (No SaaS Cards) -->
+    <div class="value-list">
+      {pillars.map((item) => (
+        <div class="value-item">
+          <div class="value-num">{item.number}</div>
+          <div class="value-content">
+            <h3 class="value-item-title">{item.title}</h3>
+            <p class="value-item-desc">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .value-section {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .value-header {
+    max-width: var(--max-width-reading);
+    margin-bottom: var(--space-12);
+  }
+
+  .value-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .value-subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0;
+  }
+
+  /* Editorial List Layout */
+  .value-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .value-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 768px) {
+    .value-item {
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-8);
+      padding-block: var(--space-8);
+      align-items: start;
+    }
+  }
+
+  .value-num {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .value-item-title {
+    font-size: var(--font-size-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .value-item-desc {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: 0;
+    max-width: 720px;
+  }
+</style>

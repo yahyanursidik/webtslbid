@@ -1,0 +1,62 @@
+:root {
+  /* Brand Color Tokens (Editorial x Educational x Institutional) */
+  --color-primary: #173F35;
+  --color-primary-hover: #102E27;
+  --color-primary-soft: #E3ECE6;
+  --color-background: #F8F6EF;
+  --color-surface: #FFFFFF;
+  --color-text: #202521;
+  --color-muted: #646B65;
+  --color-border: #DDE2DC;
+  --color-accent: #B58D52;
+  --color-accent-soft: #F6F1E7;
+  --color-focus: #173F35;
+
+  /* Typography Stacks */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-arabic: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+
+  /* Font Scale */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-md: 1.125rem;   /* 18px */
+  --font-size-lg: 1.25rem;    /* 20px */
+  --font-size-xl: 1.5rem;     /* 24px */
+  --font-size-2xl: 1.875rem;  /* 30px */
+  --font-size-3xl: 2.25rem;   /* 36px */
+  --font-size-4xl: 3rem;      /* 48px */
+  --font-size-5xl: 3.75rem;   /* 60px */
+
+  /* Line Heights */
+  --line-height-heading: 1.25;
+  --line-height-body: 1.6;
+  --line-height-relaxed: 1.75;
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* Border Radius (Moderate, non-exaggerated) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Layout Max Widths */
+  --max-width-layout: 1240px;
+  --max-width-reading: 720px;
+  --max-width-narrow: 560px;
+
+  /* Touch Target */
+  --touch-target-min: 44px;
+}

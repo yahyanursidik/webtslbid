@@ -1,0 +1,143 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  quoteEntry?: CollectionEntry<'quotes'>;
+  // Direct props fallback for single quote rendering
+  scholar?: string;
+  arabicName?: string;
+  quote?: string;
+  arabicText?: string;
+  sourceTitle?: string;
+  sourceDetail?: string;
+  verified?: boolean;
+  status?: string;
+}
+
+const { quoteEntry } = Astro.props;
+
+// Extract data from entry or props
+const data = quoteEntry ? quoteEntry.data : Astro.props;
+
+const {
+  scholar = '',
+  arabicName,
+  quote = '',
+  arabicText,
+  sourceTitle = '',
+  sourceDetail,
+  verified = false,
+  status = 'draft'
+} = data;
+
+// Strict syariah verification filter: do not render unless published AND verified
+const shouldRender = verified === true && status === 'published' && scholar && quote;
+---
+
+{shouldRender && (
+  <section class="scholar-quote-section section-sm">
+    <div class="container container-reading">
+      <div class="quote-card">
+        <!-- Small Editorial Label -->
+        <span class="eyebrow quote-label">Nasihat Ulama</span>
+
+        <!-- Arabic Text (If verified & available) -->
+        {arabicText && (
+          <p class="quote-arabic text-arabic" lang="ar" dir="rtl">
+            {arabicText}
+          </p>
+        )}
+
+        <!-- Translation / Quote Body -->
+        <blockquote class="quote-body text-editorial">
+          “{quote}”
+        </blockquote>
+
+        <!-- Attribution & Source -->
+        <footer class="quote-footer">
+          <cite class="quote-author">
+            <span class="author-name">{scholar}</span>
+            {arabicName && (
+              <span class="author-arabic" lang="ar" dir="rtl"> ({arabicName})</span>
+            )}
+          </cite>
+          <div class="quote-source">
+            <span>{sourceTitle}</span>
+            {sourceDetail && <span class="source-detail"> — {sourceDetail}</span>}
+          </div>
+        </footer>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .scholar-quote-section {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .quote-card {
+    padding: var(--space-6);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--color-accent);
+  }
+
+  @media (min-width: 768px) {
+    .quote-card {
+      padding: var(--space-8);
+    }
+  }
+
+  .quote-label {
+    margin-bottom: var(--space-3);
+  }
+
+  .quote-arabic {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    text-align: right;
+  }
+
+  .quote-body {
+    font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    font-style: normal;
+    margin-bottom: var(--space-6);
+  }
+
+  .quote-footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+
+  .quote-author {
+    font-style: normal;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .author-arabic {
+    font-weight: 400;
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+  }
+
+  .quote-source {
+    font-size: var(--font-size-xs);
+    color: var(--color-muted);
+  }
+
+  .source-detail {
+    color: var(--color-muted);
+  }
+</style>

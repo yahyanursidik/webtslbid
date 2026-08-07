@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+
+const teachers = await getCollection('teachers');
+const publishedTeachers = teachers.filter((t) => t.data.status === 'published');
+---
+
+<section class="teachers-section section">
+  <div class="container">
+    <div class="teachers-header">
+      <span class="eyebrow">Pengajar & Asatidzah</span>
+      <h2 class="teachers-title">Tim Pengajar Tarbiyah Sunnah Learning</h2>
+      <p class="teachers-subtitle">
+        Bimbingan materi pembelajaran disampaikan oleh asatidzah yang berkomitmen pada prinsip ilmu syar'i dan dalil yang shahih.
+      </p>
+    </div>
+
+    <!-- Teacher Grid (Editorial & Monogram Typographic Placeholder) -->
+    <div class="teachers-grid">
+      {publishedTeachers.map((teacher) => {
+        const initials = teacher.data.name
+          .split(' ')
+          .map((n) => n[0])
+          .slice(0, 2)
+          .join('')
+          .toUpperCase();
+
+        return (
+          <div class="teacher-card">
+            <div class="teacher-avatar">
+              {teacher.data.photo ? (
+                <img
+                  src={teacher.data.photo}
+                  alt={`Foto ${teacher.data.name}`}
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                />
+              ) : (
+                /* Elegant Typographic Monogram Placeholder (No AI Portrait Slop) */
+                <div class="monogram-placeholder" aria-label={`Inisial ${teacher.data.name}`}>
+                  <span>{initials}</span>
+                </div>
+              )}
+            </div>
+
+            <div class="teacher-info">
+              <h3 class="teacher-name">{teacher.data.name}</h3>
+              <p class="teacher-bio">{teacher.data.shortBio}</p>
+              <a href="/pengajar" class="teacher-link">
+                Lihat Profil Pengajar →
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .teachers-section {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .teachers-header {
+    max-width: var(--max-width-reading);
+    margin-bottom: var(--space-12);
+  }
+
+  .teachers-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .teachers-subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0;
+  }
+
+  .teachers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    max-width: var(--max-width-reading);
+  }
+
+  @media (min-width: 768px) {
+    .teachers-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .teacher-card {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    align-items: start;
+  }
+
+  .teacher-avatar {
+    flex-shrink: 0;
+  }
+
+  .teacher-avatar img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-primary-soft);
+  }
+
+  /* Elegant Monogram Placeholder */
+  .monogram-placeholder {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border: 2px solid var(--color-accent);
+  }
+
+  .teacher-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .teacher-name {
+    font-size: var(--font-size-md);
+    color: var(--color-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .teacher-bio {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--space-3);
+  }
+
+  .teacher-link {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .teacher-link:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+</style>

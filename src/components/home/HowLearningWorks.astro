@@ -1,0 +1,147 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Pendaftaran & Akun Portal",
+    desc: "Calon peserta mendaftar melalui form pendaftaran resmi dan mendapatkan akses ke portal peserta kelas.tslbelajarislam.id."
+  },
+  {
+    number: "02",
+    title: "Akses Modul & Pengajaran",
+    desc: "Materi dan modul dipelajari secara berurutan sesuai silabus yang telah disusun oleh tim pengajar Tarbiyah Sunnah Learning."
+  },
+  {
+    number: "03",
+    title: "Belajar Mandiri & Terstruktur",
+    desc: "Peserta menyimak pengajaran, mempelajari modul bacaan dasar, dan mencatat poin faedah ilmu secara mandiri."
+  },
+  {
+    number: "04",
+    title: "Evaluasi Pemahaman Berkala",
+    desc: "Setiap akhir bab dilengkapi dengan kuis evaluasi sederhana untuk mengukur tingkat pemahaman sebelum melangkah ke modul berikutnya."
+  }
+];
+---
+
+<section class="learning-works-section section">
+  <div class="container">
+    <div class="learning-works-header">
+      <span class="eyebrow">Mekanisme Belajar</span>
+      <h2 class="learning-works-title">Bagaimana Sistem Belajar di BID Berjalan?</h2>
+      <p class="learning-works-subtitle">
+        Alur pembelajaran praktis yang dirancang agar peserta dapat konsisten belajar di tengah kesibukan harian.
+      </p>
+    </div>
+
+    <!-- Editorial Vertical Step List (Mobile Stack Natural Order) -->
+    <div class="learning-steps">
+      {steps.map((item, idx) => (
+        <div class="step-card">
+          <div class="step-sidebar">
+            <span class="step-number">{item.number}</span>
+            {idx < steps.length - 1 && <div class="step-line" aria-hidden="true"></div>}
+          </div>
+          <div class="step-body">
+            <h3 class="step-heading">{item.title}</h3>
+            <p class="step-text">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .learning-works-section {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .learning-works-header {
+    max-width: var(--max-width-reading);
+    margin-bottom: var(--space-12);
+  }
+
+  .learning-works-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .learning-works-subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0;
+  }
+
+  .learning-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: 840px;
+  }
+
+  .step-card {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .step-card {
+      grid-template-columns: 70px 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  .step-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    border-radius: 50%;
+  }
+
+  .step-line {
+    width: 2px;
+    min-height: 40px;
+    height: 100%;
+    background-color: var(--color-border);
+    margin-top: var(--space-2);
+  }
+
+  .step-body {
+    background-color: var(--color-surface);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .step-heading {
+    font-size: var(--font-size-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .step-text {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: 0;
+  }
+</style>

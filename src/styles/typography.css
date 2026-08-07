@@ -1,0 +1,71 @@
+/* Typography Base Styles */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: var(--line-height-heading);
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(var(--font-size-3xl), 4vw, var(--font-size-5xl));
+  margin-bottom: var(--space-6);
+}
+
+h2 {
+  font-size: clamp(var(--font-size-2xl), 3vw, var(--font-size-3xl));
+  margin-bottom: var(--space-4);
+}
+
+h3 {
+  font-size: clamp(var(--font-size-xl), 2.5vw, var(--font-size-2xl));
+  margin-bottom: var(--space-3);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-2);
+}
+
+p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+p.lead {
+  font-size: clamp(var(--font-size-md), 1.5vw, var(--font-size-lg));
+  color: var(--color-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+.text-editorial {
+  font-family: var(--font-serif);
+}
+
+.text-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.25em;
+  line-height: 1.8;
+  direction: rtl;
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.text-small {
+  font-size: var(--font-size-sm);
+}
+
+.eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  display: inline-block;
+  margin-bottom: var(--space-2);
+}

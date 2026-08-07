@@ -1,0 +1,395 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Program', href: '/program' },
+  { label: 'Kurikulum', href: '/program/kurikulum' },
+  { label: 'Pengajar', href: '/pengajar' },
+  { label: 'Informasi', href: '/informasi' },
+  { label: 'Tentang', href: '/tentang' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <!-- Brand Logo / Typography -->
+    <a href="/" class="brand-link" aria-label="Tarbiyah Sunnah Learning — Halaman Utama">
+      <span class="brand-name">Tarbiyah Sunnah Learning</span>
+      <span class="brand-tagline">Belajar Islam Dasar</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Navigasi Utama">
+      <ul class="nav-list">
+        {navItems.map((item) => {
+          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={['nav-link', { active: isActive }]}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <!-- Desktop Actions -->
+    <div class="header-actions">
+      <a href="https://kelas.tslbelajarislam.id" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+        Masuk Portal
+      </a>
+      <a href="/pendaftaran" class="btn btn-primary btn-sm">
+        Daftar BID
+      </a>
+    </div>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button
+      type="button"
+      id="mobile-menu-toggle"
+      class="mobile-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-menu-drawer"
+      aria-label="Buka menu navigasi"
+    >
+      <span class="toggle-icon-line"></span>
+      <span class="toggle-icon-line"></span>
+      <span class="toggle-icon-line"></span>
+    </button>
+  </div>
+
+  <!-- Accessible Mobile Navigation Drawer -->
+  <div id="mobile-menu-drawer" class="mobile-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menu Navigasi Mobile">
+    <div class="mobile-drawer-overlay" id="mobile-menu-backdrop"></div>
+    <div class="mobile-drawer-content">
+      <div class="mobile-drawer-header">
+        <div class="brand-link">
+          <span class="brand-name">Tarbiyah Sunnah Learning</span>
+          <span class="brand-tagline">Belajar Islam Dasar</span>
+        </div>
+        <button
+          type="button"
+          id="mobile-menu-close"
+          class="mobile-close"
+          aria-label="Tutup menu navigasi"
+        >
+          ✕
+        </button>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Navigasi Mobile">
+        <ul class="mobile-nav-list">
+          {navItems.map((item) => {
+            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={['mobile-nav-link', { active: isActive }]}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+          <li>
+            <a
+              href="/faq"
+              class:list={['mobile-nav-link', { active: currentPath === '/faq' }]}
+              aria-current={currentPath === '/faq' ? 'page' : undefined}
+            >
+              FAQ
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="mobile-drawer-footer">
+        <a href="https://kelas.tslbelajarislam.id" class="btn btn-secondary w-full" target="_blank" rel="noopener noreferrer">
+          Masuk Portal Belajar
+        </a>
+        <a href="/pendaftaran" class="btn btn-primary w-full">
+          Daftar BID
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  /* Brand Typography */
+  .brand-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+  }
+
+  .brand-name {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-tagline {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--color-muted);
+    line-height: 1.2;
+  }
+
+  /* Desktop Nav */
+  .desktop-nav {
+    display: none;
+  }
+
+  @media (min-width: 992px) {
+    .desktop-nav {
+      display: block;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .nav-link {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    padding-block: var(--space-2);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .nav-link.active {
+    color: var(--color-primary);
+    font-weight: 600;
+    border-bottom-color: var(--color-primary);
+  }
+
+  /* Header Actions */
+  .header-actions {
+    display: none;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 992px) {
+    .header-actions {
+      display: flex;
+    }
+  }
+
+  .btn-sm {
+    min-height: 38px;
+    padding-inline: var(--space-4);
+    padding-block: var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+
+  /* Mobile Toggle Button */
+  .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  @media (min-width: 992px) {
+    .mobile-toggle {
+      display: none;
+    }
+  }
+
+  .toggle-icon-line {
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 1px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  /* Mobile Navigation Drawer */
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s ease, opacity 0.3s ease;
+  }
+
+  .mobile-drawer.open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .mobile-drawer-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .mobile-drawer-content {
+    position: relative;
+    z-index: 1;
+    margin-left: auto;
+    width: 85%;
+    max-width: 360px;
+    height: 100%;
+    background-color: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-6);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-drawer.open .mobile-drawer-content {
+    transform: translateX(0);
+  }
+
+  .mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .mobile-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding-block: var(--space-6);
+  }
+
+  .mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    color: var(--color-text);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.active {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .mobile-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .w-full {
+    width: 100%;
+  }
+</style>
+
+<script>
+  function setupMobileMenu() {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    const drawer = document.getElementById('mobile-menu-drawer');
+
+    if (!toggleBtn || !drawer) return;
+
+    function openMenu() {
+      drawer?.classList.add('open');
+      drawer?.setAttribute('aria-hidden', 'false');
+      toggleBtn?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      closeBtn?.focus();
+    }
+
+    function closeMenu() {
+      drawer?.classList.remove('open');
+      drawer?.setAttribute('aria-hidden', 'true');
+      toggleBtn?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      toggleBtn?.focus();
+    }
+
+    toggleBtn.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer?.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  }
+
+  // Run on initial load and view transitions
+  setupMobileMenu();
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

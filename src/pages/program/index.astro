@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScholarQuote from '../../components/global/ScholarQuote.astro';
+import FinalCTA from '../../components/home/FinalCTA.astro';
+import LearningFramework from '../../components/home/LearningFramework.astro';
+import { getCollection } from 'astro:content';
+
+const quotes = await getCollection('quotes');
+const verifiedQuote = quotes.find((q) => q.data.verified && q.data.status === 'published' && q.data.themes.includes('menuntut ilmu'));
+
+const pageTitle = "Tentang Program Belajar Islam Dasar (BID)";
+const pageDescription = "Mengenal lebih dekat program Belajar Islam Dasar, tujuan, metode, dan struktur kurikulum yang digunakan.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Header / Hero Section Khusus Program -->
+  <section class="program-hero section">
+    <div class="container container-reading">
+      <span class="eyebrow">Program Utama</span>
+      <h1 class="program-title">Belajar Islam Dasar (BID)</h1>
+      <p class="program-lead">
+        Sebuah program pembelajaran terstruktur yang dirancang khusus untuk memfasilitasi kaum muslimin dalam membangun fondasi pemahaman agama Islam dari tingkat paling dasar, secara sistematis dan sesuai dengan pemahaman Salafus Shalih.
+      </p>
+    </div>
+  </section>
+
+  <!-- Apa itu BID & Tujuan -->
+  <section class="program-details section">
+    <div class="container container-reading">
+      <div class="prose-content">
+        <h2>Tujuan Program</h2>
+        <p>
+          Program ini bertujuan untuk menghilangkan kebodohan dari diri seorang muslim terhadap perkara-perkara agama yang wajib (fardhu 'ain) untuk diketahuinya. Kami berupaya menyajikan peta ilmu yang jelas agar peserta tidak kebingungan dalam mengurutkan skala prioritas belajar.
+        </p>
+
+        <h2>Siapa yang Cocok Mengikuti Program Ini?</h2>
+        <p>
+          BID dirancang untuk siapa saja yang memiliki tekad kuat untuk menuntut ilmu agama, meliputi:
+        </p>
+        <ul class="editorial-list">
+          <li><strong>Pemula:</strong> Yang baru mulai hijrah dan ingin mengetahui dari mana harus memulai belajar Islam.</li>
+          <li><strong>Penuntut Ilmu Sibuk:</strong> Karyawan, mahasiswa, atau pekerja yang membutuhkan fleksibilitas waktu namun tetap menginginkan alur yang terstruktur.</li>
+          <li><strong>Kaum Muslimin Umum:</strong> Yang ingin memantapkan kembali dasar-dasar aqidah, tauhid, dan fikih ibadah harian.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Ulama -->
+  {verifiedQuote && <ScholarQuote quoteEntry={verifiedQuote} />}
+
+  <!-- Metode & Struktur -->
+  <section class="program-method section">
+    <div class="container container-reading">
+      <div class="method-header">
+        <h2>Metode & Struktur Pembelajaran</h2>
+        <p class="text-muted">
+          Kami memadukan pendekatan pembelajaran asinkron (mandiri) yang terukur dengan evaluasi berkala untuk memastikan kualitas pemahaman.
+        </p>
+      </div>
+      
+      <div class="method-grid">
+        <div class="method-item">
+          <div class="method-num">01</div>
+          <h3>Berbasis Modul & Video</h3>
+          <p>Setiap mata pelajaran dilengkapi dengan modul panduan ringkas dan video pemaparan dari asatidzah yang berkompeten.</p>
+        </div>
+        <div class="method-item">
+          <div class="method-num">02</div>
+          <h3>Evaluasi Tiap Pekan</h3>
+          <p>Terdapat kuis pekanan untuk mereviu pemahaman materi sebelum peserta diizinkan melangkah ke bab berikutnya.</p>
+        </div>
+        <div class="method-item">
+          <div class="method-num">03</div>
+          <h3>Grup Diskusi Terarah</h3>
+          <p>Peserta didampingi oleh musyrif/musyrifah dalam grup khusus untuk sesi tanya jawab dan bimbingan belajar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alur Belajar (Reused from Home) -->
+  <LearningFramework />
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .program-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-12);
+    padding-block-end: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .program-hero {
+      padding-block-start: var(--space-20);
+      padding-block-end: var(--space-16);
+    }
+  }
+
+  .program-title {
+    font-size: clamp(2.125rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .program-lead {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  .program-details {
+    background-color: var(--color-surface);
+  }
+
+  .prose-content h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    margin-top: var(--space-10);
+  }
+
+  .prose-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .prose-content p {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--space-6);
+  }
+
+  .editorial-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: var(--space-6);
+  }
+
+  .editorial-list li {
+    position: relative;
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-body);
+    color: var(--color-text);
+  }
+
+  .editorial-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: var(--font-size-lg);
+    line-height: 1;
+    top: 2px;
+  }
+
+  .program-method {
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .method-header {
+    margin-bottom: var(--space-10);
+  }
+  
+  .method-header h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+  }
+  
+  .text-muted {
+    font-size: var(--font-size-md);
+    color: var(--color-muted);
+  }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .method-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .method-item {
+    background-color: var(--color-surface);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .method-num {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-3);
+  }
+
+  .method-item h3 {
+    font-size: var(--font-size-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .method-item p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: 0;
+  }
+</style>

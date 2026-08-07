@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import ProblemContext from '../components/home/ProblemContext.astro';
+import ValueProposition from '../components/home/ValueProposition.astro';
+import ScholarQuote from '../components/global/ScholarQuote.astro';
+import LearningFramework from '../components/home/LearningFramework.astro';
+import CurriculumExplorer from '../components/home/CurriculumExplorer.astro';
+import HowLearningWorks from '../components/home/HowLearningWorks.astro';
+import TeacherPreview from '../components/home/TeacherPreview.astro';
+import HomeFAQ from '../components/home/HomeFAQ.astro';
+import FinalCTA from '../components/home/FinalCTA.astro';
+
+const quotes = await getCollection('quotes');
+const verifiedQuote = quotes.find((q) => q.data.verified && q.data.status === 'published');
+---
+
+<BaseLayout
+  title="Belajar Islam dari Dasarnya, Bertahap dan Terarah"
+  description="Program Belajar Islam Dasar (BID) Tarbiyah Sunnah Learning membantu peserta membangun fondasi ilmu agama secara terstruktur dan bertahap."
+>
+  <!-- STEP 5: Hero Section -->
+  <Hero />
+
+  <!-- STEP 6: Problem Context Section -->
+  <ProblemContext />
+
+  <!-- STEP 6: Value Proposition Section -->
+  <ValueProposition />
+
+  <!-- STEP 7: Verified Scholar Quote Section -->
+  {verifiedQuote && <ScholarQuote quoteEntry={verifiedQuote} />}
+
+  <!-- STEP 8: Learning Framework Section -->
+  <LearningFramework />
+
+  <!-- STEP 9: Curriculum Explorer Section -->
+  <CurriculumExplorer />
+
+  <!-- STEP 10: How Learning Works Section -->
+  <HowLearningWorks />
+
+  <!-- STEP 11: Teacher Preview Section -->
+  <TeacherPreview />
+
+  <!-- STEP 12: FAQ Section -->
+  <HomeFAQ />
+
+  <!-- STEP 12: Final CTA Section -->
+  <FinalCTA />
+</BaseLayout>
