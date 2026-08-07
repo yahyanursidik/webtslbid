@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FinalCTA from '../components/home/FinalCTA.astro';
+
+const pageTitle = "Tentang Tarbiyah Sunnah Learning";
+const pageDescription = "Mengenal profil, visi, misi, dan nilai-nilai dasar penyelenggaraan program pembelajaran di Tarbiyah Sunnah Learning.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="about-hero section">
+    <div class="container container-reading">
+      <span class="eyebrow">Profil Lembaga</span>
+      <h1 class="hero-title">Tentang Tarbiyah Sunnah Learning</h1>
+      <p class="hero-lead">
+        Tarbiyah Sunnah Learning (TSL) adalah platform pendidikan Islam yang berdedikasi menyajikan pembelajaran ilmu agama secara terstruktur, sistematis, dan sesuai pemahaman Salafus Shalih.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="about-content section">
+    <div class="container container-reading">
+      <div class="prose-block">
+        <h2>Visi & Misi</h2>
+        <p>
+          <strong>Visi:</strong> Menjadi sarana pembelajaran ilmu agama Islam dasar dan lanjutan yang tepercaya, terukur, serta dapat diakses oleh kaum muslimin secara luas.
+        </p>
+        <p>
+          <strong>Misi:</strong>
+        </p>
+        <ul class="editorial-list">
+          <li>Menyusun kurikulum belajar Islam dari tingkat paling dasar secara bertahap.</li>
+          <li>Menyajikan materi berbasis dalil Al-Qur'an dan As-Sunnah yang shahih.</li>
+          <li>Mengembangkan metode pembelajaran mandiri yang didampingi oleh asatidzah dan musyrif.</li>
+        </ul>
+      </div>
+
+      <div class="prose-block">
+        <h2>Prinsip Pembelajaran</h2>
+        <p>
+          Dalam menyelenggarakan program Belajar Islam Dasar (BID), TSL memegang teguh tiga prinsip utama:
+        </p>
+        <div class="principles-grid">
+          <div class="principle-item">
+            <h3>1. Keotentikan Dalil</h3>
+            <p>Setiap materi disandarkan pada sumber-sumber syar'i yang terpercaya dan pemahaman para ulama Ahlus Sunnah.</p>
+          </div>
+          <div class="principle-item">
+            <h3>2. Keteraturan Alur</h3>
+            <p>Materi tidak disampaikan secara acak, melainkan menggunakan peta ilmu yang rapi agar pemahaman terbentuk secara utuh.</p>
+          </div>
+          <div class="principle-item">
+            <h3>3. Kemudahan Akses</h3>
+            <p>Dapat diikuti secara fleksibel tanpa mengurangi keseriusan dan evaluasi pemahaman peserta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .about-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-12);
+    padding-block-end: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .about-hero {
+      padding-block-start: var(--space-20);
+      padding-block-end: var(--space-16);
+    }
+  }
+
+  .hero-title {
+    font-size: clamp(2.125rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  .about-content {
+    background-color: var(--color-surface);
+  }
+
+  .prose-block {
+    margin-bottom: var(--space-12);
+  }
+
+  .prose-block h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .prose-block p {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+  }
+
+  .editorial-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .editorial-list li {
+    position: relative;
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+  }
+
+  .editorial-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: var(--font-size-lg);
+    line-height: 1;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .principles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .principle-item {
+    background-color: var(--color-background);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .principle-item h3 {
+    font-size: var(--font-size-md);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .principle-item p {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    line-height: var(--line-height-body);
+    margin-bottom: 0;
+  }
+</style>

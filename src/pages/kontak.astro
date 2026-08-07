@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FinalCTA from '../components/home/FinalCTA.astro';
+
+const pageTitle = "Kontak Resmi — Tarbiyah Sunnah Learning";
+const pageDescription = "Hubungi tim sekretariat Tarbiyah Sunnah Learning untuk informasi seputar pendaftaran dan program Belajar Islam Dasar.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="contact-hero section">
+    <div class="container container-reading">
+      <span class="eyebrow">Hubungi Kami</span>
+      <h1 class="hero-title">Kontak Resmi TSL</h1>
+      <p class="hero-lead">
+        Jika Anda memiliki pertanyaan seputar pendaftaran, bantuan teknis portal, atau kemitraan, silakan hubungi tim sekretariat kami melalui kanal resmi berikut.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Methods -->
+  <section class="contact-body section">
+    <div class="container container-reading">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Layanan Informasi WhatsApp</h3>
+          <p class="contact-detail">+62 811-2345-6789</p>
+          <p class="contact-sub">Hari & Jam Kerja: Senin – Jumat (08:00 – 16:00 WIB)</p>
+        </div>
+
+        <div class="contact-card">
+          <h3>Surat Elektronik (Email)</h3>
+          <p class="contact-detail">info@tslbelajarislam.id</p>
+          <p class="contact-sub">Untuk pertanyaan resmi, administrasi, atau permohonan informasi.</p>
+        </div>
+
+        <div class="contact-card">
+          <h3>Sekretariat Utama</h3>
+          <p class="contact-detail">Bandung, Jawa Barat, Indonesia</p>
+          <p class="contact-sub">Yayasan Tarbiyah Sunnah Bandung.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .contact-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-12);
+    padding-block-end: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .contact-hero {
+      padding-block-start: var(--space-20);
+      padding-block-end: var(--space-16);
+    }
+  }
+
+  .hero-title {
+    font-size: clamp(2.125rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  .contact-body {
+    background-color: var(--color-surface);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .contact-card {
+    padding: var(--space-6);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .contact-card h3 {
+    font-size: var(--font-size-md);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .contact-detail {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-1);
+  }
+
+  .contact-sub {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    margin-bottom: 0;
+  }
+</style>
