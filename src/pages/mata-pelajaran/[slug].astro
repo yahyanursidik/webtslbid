@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FinalCTA from '../../components/home/FinalCTA.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const subjects = await getCollection('subjects');
+  return subjects.map((subject) => ({
+    params: { slug: subject.id },
+    props: { subject },
+  }));
+}
+
+const { subject } = Astro.props;
+const { Content } = await render(subject);
+
+// Fetch assigned teachers
+const teachers = await getCollection('teachers');
+const assignedTeachers = teachers.filter((t) => subject.data.teacherIds.includes(t.id));
+
+const pageTitle = subject.data.seoTitle || `${subject.data.title} — Mata Pelajaran BID`;
+const pageDescription = subject.data.seoDescription || subject.data.summary;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Subject Hero -->
+  <section class="subject-hero section">
+    <div class="container container-reading">
+      <div class="hero-header">
+        <a href="/program/kurikulum" class="back-link">← Kembali ke Kurikulum</a>
+        <span class="modul-badge">Modul {subject.data.order} — {subject.data.category}</span>
+      </div>
+      <h1 class="subject-title">{subject.data.title}</h1>
+      <p class="subject-lead">{subject.data.summary}</p>
+    </div>
+  </section>
+
+  <!-- Main Content Body -->
+  <section class="subject-body section">
+    <div class="container container-reading">
+      <!-- Mengapa Dipelajari / Deskripsi -->
+      <div class="content-block">
+        <h2>Mengapa Mata Pelajaran Ini Dipelajari?</h2>
+        <p>{subject.data.description}</p>
+      </div>
+
+      <!-- Detail Konten Markdown -->
+      <div class="markdown-body">
+        <Content />
+      </div>
+
+      <!-- Target Capaian -->
+      <div class="content-block objectives-block">
+        <h2>Target Capaian Pembelajaran</h2>
+        <ul class="editorial-list">
+          {subject.data.learningObjectives.map((obj) => (
+            <li>{obj}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Posisi Dalam Program -->
+      <div class="content-block position-block">
+        <h2>Posisi dalam Program</h2>
+        <p>
+          Mata pelajaran ini menempati urutan ke-<strong>{subject.data.order}</strong> dalam kerangka pembelajaran BID. Diperuntukkan sebagai fondasi ilmu utama dalam kategori <strong>{subject.data.category}</strong>.
+        </p>
+      </div>
+
+      <!-- Pengajar terkait -->
+      {assignedTeachers.length > 0 && (
+        <div class="content-block teachers-block">
+          <h2>Pengajar Mata Pelajaran Ini</h2>
+          <div class="teachers-list">
+            {assignedTeachers.map((teacher) => (
+              <div class="teacher-item">
+                <div class="teacher-info">
+                  <h3>{teacher.data.name}</h3>
+                  <p>{teacher.data.shortBio}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .subject-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-10);
+    padding-block-end: var(--space-12);
+  }
+
+  .hero-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .back-link {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+
+  .modul-badge {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .subject-title {
+    font-size: clamp(2.125rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+  }
+
+  .subject-lead {
+    font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+    color: var(--color-text);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0;
+  }
+
+  .subject-body {
+    background-color: var(--color-surface);
+  }
+
+  .content-block {
+    margin-bottom: var(--space-10);
+  }
+
+  .content-block h2 {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    border-bottom: 2px solid var(--color-primary-soft);
+    padding-bottom: var(--space-2);
+  }
+
+  .content-block p {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+  }
+
+  .editorial-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .editorial-list li {
+    position: relative;
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+  }
+
+  .editorial-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .teachers-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .teacher-item {
+    padding: var(--space-4);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .teacher-info h3 {
+    font-size: var(--font-size-md);
+    color: var(--color-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .teacher-info p {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    margin-bottom: 0;
+  }
+</style>

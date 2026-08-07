@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FinalCTA from '../../components/home/FinalCTA.astro';
+import { getCollection } from 'astro:content';
+
+const subjects = await getCollection('subjects');
+const publishedSubjects = subjects
+  .filter((s) => s.data.status === 'published')
+  .sort((a, b) => a.data.order - b.data.order);
+
+const groupedSubjects = publishedSubjects.reduce<Record<string, typeof publishedSubjects>>((acc, subject) => {
+  const cat = subject.data.category || 'Materi Utama';
+  if (!acc[cat]) acc[cat] = [];
+  acc[cat].push(subject);
+  return acc;
+}, {});
+
+const pageTitle = "Kurikulum & Silabus Program BID";
+const pageDescription = "Daftar lengkap mata pelajaran dan silabus terstruktur Program Belajar Islam Dasar (BID) Tarbiyah Sunnah Learning.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="curriculum-hero section">
+    <div class="container container-reading">
+      <span class="eyebrow">Struktur Akademik</span>
+      <h1 class="hero-title">Kurikulum & Silabus BID</h1>
+      <p class="hero-lead">
+        Kurikulum BID disusun secara hierarkis dan berurutan agar peserta dapat memahami keterkaitan antar-cabang ilmu syar'i tanpa kebingungan.
+      </p>
+    </div>
+  </section>
+
+  <!-- Detailed Curriculum List -->
+  <section class="curriculum-body section">
+    <div class="container">
+      <div class="groups-wrapper">
+        {Object.entries(groupedSubjects).map(([category, subjectList]) => (
+          <div class="category-group">
+            <div class="group-header">
+              <h2>{category}</h2>
+              <span class="count-badge">{subjectList.length} Mata Pelajaran</span>
+            </div>
+
+            <div class="subjects-grid">
+              {subjectList.map((subject) => (
+                <div class="subject-card" id={subject.id}>
+                  <div class="card-header">
+                    <span class="modul-tag">Modul {subject.data.order}</span>
+                    <h3>{subject.data.title}</h3>
+                  </div>
+
+                  <p class="summary-text">{subject.data.summary}</p>
+                  
+                  <div class="description-block">
+                    <p>{subject.data.description}</p>
+                  </div>
+
+                  <div class="objectives-box">
+                    <span class="obj-title">Target Capaian Pembelajaran:</span>
+                    <ul>
+                      {subject.data.learningObjectives.map((obj) => (
+                        <li>✓ {obj}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="card-footer">
+                    <a href={`/mata-pelajaran/${subject.id}`} class="btn btn-secondary btn-sm">
+                      Detail Mata Pelajaran →
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .curriculum-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-12);
+    padding-block-end: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .curriculum-hero {
+      padding-block-start: var(--space-20);
+      padding-block-end: var(--space-16);
+    }
+  }
+
+  .hero-title {
+    font-size: clamp(2.125rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  .curriculum-body {
+    background-color: var(--color-surface);
+  }
+
+  .groups-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .category-group {
+    border-top: 2px solid var(--color-primary);
+    padding-top: var(--space-8);
+  }
+
+  .group-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-8);
+  }
+
+  .group-header h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+  }
+
+  .count-badge {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .subjects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .subject-card {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .modul-tag {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+
+  .card-header h3 {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: 0;
+  }
+
+  .summary-text {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: 0;
+  }
+
+  .description-block {
+    font-size: var(--font-size-base);
+    color: var(--color-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .description-block p {
+    margin-bottom: 0;
+  }
+
+  .objectives-box {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+
+  .obj-title {
+    display: block;
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-2);
+  }
+
+  .objectives-box ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .objectives-box li {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+  }
+
+  .card-footer {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .btn-sm {
+    min-height: 40px;
+    padding-inline: var(--space-4);
+    font-size: var(--font-size-xs);
+  }
+</style>
