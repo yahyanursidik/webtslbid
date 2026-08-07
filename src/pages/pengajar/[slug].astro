@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FinalCTA from '../../components/home/FinalCTA.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const teachers = await getCollection('teachers');
+  return teachers.map((teacher) => ({
+    params: { slug: teacher.id },
+    props: { teacher },
+  }));
+}
+
+const { teacher } = Astro.props;
+const { Content } = await render(teacher);
+
+// Fetch subjects taught by this teacher
+const subjects = await getCollection('subjects');
+const taughtSubjects = subjects.filter((s) => teacher.data.subjects.includes(s.id));
+
+const initials = teacher.data.name
+  .split(' ')
+  .map((n) => n[0])
+  .slice(0, 2)
+  .join('')
+  .toUpperCase();
+
+const pageTitle = teacher.data.seoTitle || `${teacher.data.name} — Profil Pengajar BID`;
+const pageDescription = teacher.data.seoDescription || teacher.data.shortBio;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Teacher Profile Hero -->
+  <section class="teacher-hero section">
+    <div class="container container-reading">
+      <a href="/pengajar" class="back-link">← Kembali ke Tim Pengajar</a>
+      
+      <div class="profile-header">
+        <div class="teacher-avatar">
+          {teacher.data.photo ? (
+            <img
+              src={teacher.data.photo}
+              alt={`Foto ${teacher.data.name}`}
+              width="120"
+              height="120"
+            />
+          ) : (
+            <div class="monogram-placeholder">
+              <span>{initials}</span>
+            </div>
+          )}
+        </div>
+        
+        <div class="profile-title-block">
+          <span class="eyebrow">Pengajar Tarbiyah Sunnah</span>
+          <h1 class="teacher-title">{teacher.data.name}</h1>
+          <p class="teacher-short-bio">{teacher.data.shortBio}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Bio & Taught Subjects -->
+  <section class="teacher-content section">
+    <div class="container container-reading">
+      <div class="bio-block">
+        <h2>Biografi & Profil</h2>
+        <p>{teacher.data.bio}</p>
+        
+        <div class="markdown-body">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Taught Subjects -->
+      {taughtSubjects.length > 0 && (
+        <div class="taught-subjects-block">
+          <h2>Mata Pelajaran yang Diampu</h2>
+          <div class="subjects-list">
+            {taughtSubjects.map((subj) => (
+              <div class="subject-card">
+                <span class="modul-badge">Modul {subj.data.order} — {subj.data.category}</span>
+                <h3>
+                  <a href={`/mata-pelajaran/${subj.id}`} class="subject-link">
+                    {subj.data.title}
+                  </a>
+                </h3>
+                <p>{subj.data.summary}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .teacher-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-10);
+    padding-block-end: var(--space-12);
+  }
+
+  .back-link {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-muted);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: var(--space-6);
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  @media (min-width: 640px) {
+    .profile-header {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .teacher-avatar img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-primary-soft);
+  }
+
+  .monogram-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    border: 3px solid var(--color-accent);
+  }
+
+  .teacher-title {
+    font-size: clamp(1.875rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: var(--space-2);
+  }
+
+  .teacher-short-bio {
+    font-size: var(--font-size-md);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  .teacher-content {
+    background-color: var(--color-surface);
+  }
+
+  .bio-block, .taught-subjects-block {
+    margin-bottom: var(--space-12);
+  }
+
+  .bio-block h2, .taught-subjects-block h2 {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    border-bottom: 2px solid var(--color-primary-soft);
+    padding-bottom: var(--space-2);
+  }
+
+  .bio-block p {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+  }
+
+  .subjects-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .subject-card {
+    padding: var(--space-6);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .modul-badge {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .subject-card h3 {
+    font-size: var(--font-size-lg);
+    margin-top: var(--space-1);
+    margin-bottom: var(--space-2);
+  }
+
+  .subject-link {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .subject-link:hover {
+    text-decoration: underline;
+  }
+
+  .subject-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    margin-bottom: 0;
+  }
+</style>
