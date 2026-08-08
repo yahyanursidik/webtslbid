@@ -13,7 +13,7 @@ import HomeFAQ from '../components/home/HomeFAQ.astro';
 import FinalCTA from '../components/home/FinalCTA.astro';
 
 const quotes = await getCollection('quotes');
-const verifiedQuote = quotes.find((q) => q.data.verified && q.data.status === 'published');
+const verifiedQuotes = quotes.filter((q) => q.data.verified && q.data.status === 'published');
 ---
 
 <BaseLayout
@@ -29,8 +29,8 @@ const verifiedQuote = quotes.find((q) => q.data.verified && q.data.status === 'p
   <!-- STEP 6: Value Proposition Section -->
   <ValueProposition />
 
-  <!-- STEP 7: Verified Scholar Quote Section -->
-  {verifiedQuote && <ScholarQuote quoteEntry={verifiedQuote} />}
+  <!-- STEP 7: Verified Scholar Quotes Slider Section -->
+  {verifiedQuotes.length > 0 && <ScholarQuote quotesEntries={verifiedQuotes} />}
 
   <!-- STEP 8: Learning Framework Section -->
   <LearningFramework />

@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   quoteEntry?: CollectionEntry<'quotes'>;
+  quotesEntries?: CollectionEntry<'quotes'>[];
   // Direct props fallback for single quote rendering
   scholar?: string;
   arabicName?: string;
@@ -14,58 +15,108 @@ interface Props {
   status?: string;
 }
 
-const { quoteEntry } = Astro.props;
+const { quoteEntry, quotesEntries } = Astro.props;
 
-// Extract data from entry or props
-const data = quoteEntry ? quoteEntry.data : Astro.props;
+// Determine list of published & verified quotes
+let quoteList: Array<any> = [];
 
-const {
-  scholar = '',
-  arabicName,
-  quote = '',
-  arabicText,
-  sourceTitle = '',
-  sourceDetail,
-  verified = false,
-  status = 'draft'
-} = data;
+if (quotesEntries && quotesEntries.length > 0) {
+  quoteList = quotesEntries.filter(
+    (q) => q.data.verified === true && q.data.status === 'published'
+  );
+} else if (quoteEntry) {
+  if (quoteEntry.data.verified && quoteEntry.data.status === 'published') {
+    quoteList = [quoteEntry];
+  }
+} else {
+  const data = Astro.props;
+  if (data.verified && data.status === 'published' && data.scholar && data.quote) {
+    quoteList = [data];
+  }
+}
 
-// Strict syariah verification filter: do not render unless published AND verified
-const shouldRender = verified === true && status === 'published' && scholar && quote;
+const isSlider = quoteList.length > 1;
 ---
 
-{shouldRender && (
-  <section class="scholar-quote-section section-sm">
+{quoteList.length > 0 && (
+  <section class="scholar-quote-section section-sm" aria-label="Nasihat Ulama tentang Menuntut Ilmu">
     <div class="container container-reading">
-      <div class="quote-card">
-        <!-- Small Editorial Label -->
-        <span class="eyebrow quote-label">Nasihat Ulama</span>
+      <div class="quote-slider-wrapper" id="scholar-quote-slider" data-autoplay="6000">
+        <!-- Header Controls -->
+        <div class="slider-header">
+          <span class="eyebrow quote-label">Nasihat Ulama — Menuntut Ilmu</span>
+          {isSlider && (
+            <div class="slider-nav-buttons">
+              <button type="button" class="slider-btn prev-btn" aria-label="Nasihat Sebelumnya">
+                ←
+              </button>
+              <span class="slide-counter">
+                <span class="current-slide-num">1</span> / <span>{quoteList.length}</span>
+              </span>
+              <button type="button" class="slider-btn next-btn" aria-label="Nasihat Selanjutnya">
+                →
+              </button>
+            </div>
+          )}
+        </div>
 
-        <!-- Arabic Text (If verified & available) -->
-        {arabicText && (
-          <p class="quote-arabic text-arabic" lang="ar" dir="rtl">
-            {arabicText}
-          </p>
-        )}
+        <!-- Slides List -->
+        <div class="slides-container">
+          {quoteList.map((item, index) => {
+            const data = item.data ? item.data : item;
+            return (
+              <div
+                class:list={['quote-slide', { active: index === 0 }]}
+                data-slide-index={index}
+                aria-hidden={index === 0 ? 'false' : 'true'}
+              >
+                <div class="quote-card">
+                  {/* Arabic Text (If verified & available) */}
+                  {data.arabicText && (
+                    <p class="quote-arabic text-arabic" lang="ar" dir="rtl">
+                      {data.arabicText}
+                    </p>
+                  )}
 
-        <!-- Translation / Quote Body -->
-        <blockquote class="quote-body text-editorial">
-          “{quote}”
-        </blockquote>
+                  {/* Translation / Quote Body */}
+                  <blockquote class="quote-body text-editorial">
+                    “{data.quote}”
+                  </blockquote>
 
-        <!-- Attribution & Source -->
-        <footer class="quote-footer">
-          <cite class="quote-author">
-            <span class="author-name">{scholar}</span>
-            {arabicName && (
-              <span class="author-arabic" lang="ar" dir="rtl"> ({arabicName})</span>
-            )}
-          </cite>
-          <div class="quote-source">
-            <span>{sourceTitle}</span>
-            {sourceDetail && <span class="source-detail"> — {sourceDetail}</span>}
+                  {/* Attribution & Source */}
+                  <footer class="quote-footer">
+                    <cite class="quote-author">
+                      <span class="author-name">{data.scholar}</span>
+                      {data.arabicName && (
+                        <span class="author-arabic" lang="ar" dir="rtl"> ({data.arabicName})</span>
+                      )}
+                    </cite>
+                    <div class="quote-source">
+                      <span>{data.sourceTitle}</span>
+                      {data.sourceDetail && <span class="source-detail"> — {data.sourceDetail}</span>}
+                    </div>
+                  </footer>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Dots Indicator -->
+        {isSlider && (
+          <div class="slider-dots" role="tablist" aria-label="Pilih Nasihat Ulama">
+            {quoteList.map((_, idx) => (
+              <button
+                type="button"
+                class:list={['dot-btn', { active: idx === 0 }]}
+                data-dot-index={idx}
+                role="tab"
+                aria-selected={idx === 0 ? 'true' : 'false'}
+                aria-label={`Lihat Nasihat ${idx + 1}`}
+              ></button>
+            ))}
           </div>
-        </footer>
+        )}
       </div>
     </div>
   </section>
@@ -76,6 +127,71 @@ const shouldRender = verified === true && status === 'published' && scholar && q
     background-color: var(--color-surface);
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
+  }
+
+  .quote-slider-wrapper {
+    position: relative;
+  }
+
+  .slider-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+  }
+
+  .quote-label {
+    margin-bottom: 0;
+  }
+
+  .slider-nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .slide-counter {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .slider-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .slider-btn:hover {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    border-color: var(--color-primary);
+  }
+
+  .slides-container {
+    position: relative;
+    min-height: 220px;
+  }
+
+  .quote-slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .quote-slide.active {
+    display: block;
+    opacity: 1;
   }
 
   .quote-card {
@@ -90,10 +206,6 @@ const shouldRender = verified === true && status === 'published' && scholar && q
     .quote-card {
       padding: var(--space-8);
     }
-  }
-
-  .quote-label {
-    margin-bottom: var(--space-3);
   }
 
   .quote-arabic {
@@ -140,4 +252,120 @@ const shouldRender = verified === true && status === 'published' && scholar && q
   .source-detail {
     color: var(--color-muted);
   }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .dot-btn {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-border);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .dot-btn.active {
+    background-color: var(--color-primary);
+    transform: scale(1.2);
+  }
 </style>
+
+<script>
+  function setupQuoteSlider() {
+    const slider = document.getElementById('scholar-quote-slider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll<HTMLElement>('.quote-slide');
+    const dots = slider.querySelectorAll<HTMLElement>('.dot-btn');
+    const prevBtn = slider.querySelector<HTMLElement>('.prev-btn');
+    const nextBtn = slider.querySelector<HTMLElement>('.next-btn');
+    const counter = slider.querySelector<HTMLElement>('.current-slide-num');
+
+    if (slides.length <= 1) return;
+
+    let currentIndex = 0;
+    let autoInterval: number | undefined;
+    const intervalTime = parseInt(slider.getAttribute('data-autoplay') || '6000', 10);
+
+    function goToSlide(index: number) {
+      slides[currentIndex].classList.remove('active');
+      slides[currentIndex].setAttribute('aria-hidden', 'true');
+      if (dots[currentIndex]) {
+        dots[currentIndex].classList.remove('active');
+        dots[currentIndex].setAttribute('aria-selected', 'false');
+      }
+
+      currentIndex = (index + slides.length) % slides.length;
+
+      slides[currentIndex].classList.add('active');
+      slides[currentIndex].setAttribute('aria-hidden', 'false');
+      if (dots[currentIndex]) {
+        dots[currentIndex].classList.add('active');
+        dots[currentIndex].setAttribute('aria-selected', 'true');
+      }
+
+      if (counter) {
+        counter.textContent = String(currentIndex + 1);
+      }
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoInterval = window.setInterval(nextSlide, intervalTime);
+    }
+
+    function stopAutoPlay() {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = undefined;
+      }
+    }
+
+    // Event Listeners
+    prevBtn?.addEventListener('click', () => {
+      prevSlide();
+      startAutoPlay();
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      nextSlide();
+      startAutoPlay();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const index = parseInt(target.getAttribute('data-dot-index') || '0', 10);
+        goToSlide(index);
+        startAutoPlay();
+      });
+    });
+
+    // Pause on Hover & Focus
+    slider.addEventListener('mouseenter', stopAutoPlay);
+    slider.addEventListener('mouseleave', startAutoPlay);
+    slider.addEventListener('focusin', stopAutoPlay);
+    slider.addEventListener('focusout', startAutoPlay);
+
+    // Initial Start
+    startAutoPlay();
+  }
+
+  setupQuoteSlider();
+  document.addEventListener('astro:page-load', setupQuoteSlider);
+</script>
