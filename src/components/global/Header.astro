@@ -5,17 +5,19 @@ const navItems = [
   { label: 'Program', href: '/program' },
   { label: 'Kurikulum', href: '/program/kurikulum' },
   { label: 'Pengajar', href: '/pengajar' },
-  { label: 'Informasi', href: '/informasi' },
   { label: 'Tentang', href: '/tentang' },
 ];
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <!-- Brand Logo / Typography -->
+    <!-- Brand Logo -->
     <a href="/" class="brand-link" aria-label="Tarbiyah Sunnah Learning — Halaman Utama">
-      <span class="brand-name">Tarbiyah Sunnah Learning</span>
-      <span class="brand-tagline">Belajar Islam Dasar</span>
+      <img src="/logo/logo-bid.png" alt="Logo Belajar Islam Dasar" class="brand-logo" width="44" height="44" />
+      <div class="brand-text">
+        <span class="brand-name">Tarbiyah Sunnah Learning</span>
+        <span class="brand-tagline">Belajar Islam Dasar</span>
+      </div>
     </a>
 
     <!-- Desktop Navigation -->
@@ -40,10 +42,10 @@ const navItems = [
 
     <!-- Desktop Actions -->
     <div class="header-actions">
-      <a href="https://kelas.tslbelajarislam.id" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+      <a href="https://my.tslbelajarislam.id/account/login" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
         Masuk Portal
       </a>
-      <a href="/pendaftaran" class="btn btn-primary btn-sm">
+      <a href="https://daftar.tslbelajarislam.id/" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
         Daftar BID
       </a>
     </div>
@@ -68,10 +70,13 @@ const navItems = [
     <div class="mobile-drawer-overlay" id="mobile-menu-backdrop"></div>
     <div class="mobile-drawer-content">
       <div class="mobile-drawer-header">
-        <div class="brand-link">
-          <span class="brand-name">Tarbiyah Sunnah Learning</span>
-          <span class="brand-tagline">Belajar Islam Dasar</span>
-        </div>
+        <a href="/" class="brand-link">
+          <img src="/logo/logo-bid.png" alt="Logo Belajar Islam Dasar" class="brand-logo" width="36" height="36" />
+          <div class="brand-text">
+            <span class="brand-name">Tarbiyah Sunnah Learning</span>
+            <span class="brand-tagline">Belajar Islam Dasar</span>
+          </div>
+        </a>
         <button
           type="button"
           id="mobile-menu-close"
@@ -111,10 +116,10 @@ const navItems = [
       </nav>
 
       <div class="mobile-drawer-footer">
-        <a href="https://kelas.tslbelajarislam.id" class="btn btn-secondary w-full" target="_blank" rel="noopener noreferrer">
+        <a href="https://my.tslbelajarislam.id/account/login" class="btn btn-secondary w-full" target="_blank" rel="noopener noreferrer">
           Masuk Portal Belajar
         </a>
-        <a href="/pendaftaran" class="btn btn-primary w-full">
+        <a href="https://daftar.tslbelajarislam.id/" class="btn btn-primary w-full" target="_blank" rel="noopener noreferrer">
           Daftar BID
         </a>
       </div>
@@ -138,11 +143,23 @@ const navItems = [
     height: 72px;
   }
 
-  /* Brand Typography */
+  /* Brand Typography & Logo */
   .brand-link {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
     text-decoration: none;
+  }
+
+  .brand-logo {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
   }
 
   .brand-name {
