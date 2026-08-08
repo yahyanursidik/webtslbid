@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FinalCTA from '../../components/home/FinalCTA.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+const publishedArticles = articles
+  .filter((a) => a.data.status === 'published')
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+const pageTitle = "Artikel & Artikel Edukasi — Tarbiyah Sunnah Learning";
+const pageDescription = "Kumpulan artikel edukasi dan bacaan seputar pentingnya menuntut ilmu agama secara terstruktur.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="articles-hero section">
+    <div class="container container-reading">
+      <span class="eyebrow">Artikel Edukasi</span>
+      <h1 class="hero-title">Artikel & Faedah Ilmu</h1>
+      <p class="hero-lead">
+        Bacaan edukatif untuk menemani perjalanan menuntut ilmu dan memberikan pemahaman seputar fondasi syariat.
+      </p>
+    </div>
+  </section>
+
+  <!-- Articles List -->
+  <section class="articles-directory section">
+    <div class="container container-reading">
+      <div class="articles-grid">
+        {publishedArticles.map((art) => (
+          <article class="article-card">
+            <div class="card-meta">
+              <span class="category-tag">{art.data.category}</span>
+              <time datetime={art.data.publishedAt.toISOString()}>
+                {art.data.publishedAt.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+            </div>
+
+            <h2 class="card-title">
+              <a href={`/artikel/${art.id}`} class="article-link">
+                {art.data.title}
+              </a>
+            </h2>
+
+            <p class="card-summary">{art.data.summary}</p>
+
+            <div class="card-footer">
+              <span class="author-name">Oleh: {art.data.author}</span>
+              {art.data.reviewedBy && <span class="reviewer-tag">Muraja'ah: {art.data.reviewedBy}</span>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .articles-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-12);
+    padding-block-end: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .articles-hero {
+      padding-block-start: var(--space-20);
+      padding-block-end: var(--space-16);
+    }
+  }
+
+  .hero-title {
+    font-size: clamp(2.125rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  .articles-directory {
+    background-color: var(--color-surface);
+  }
+
+  .articles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .article-card {
+    padding: var(--space-8);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--font-size-xs);
+    color: var(--color-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .category-tag {
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .card-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .article-link {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .article-link:hover {
+    text-decoration: underline;
+  }
+
+  .card-summary {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--space-4);
+  }
+
+  .card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    font-size: var(--font-size-xs);
+    color: var(--color-muted);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+
+  .reviewer-tag {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+</style>

@@ -1,0 +1,255 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "Pendaftaran Belajar Islam Dasar (BID) — Tarbiyah Sunnah Learning";
+const pageDescription = "Formulir dan alur pendaftaran resmi program Belajar Islam Dasar Tarbiyah Sunnah Learning.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="registration-hero section">
+    <div class="container container-reading">
+      <span class="eyebrow">Pendaftaran Angkatan Baru</span>
+      <h1 class="hero-title">Gabung Bersama Belajar Islam Dasar</h1>
+      <p class="hero-lead">
+        Mulai perjalanan menuntut ilmu agama Anda secara bertahap, terstruktur, dan terarah dari dasar.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Registration Info -->
+  <section class="registration-body section">
+    <div class="container container-reading">
+      
+      <!-- Eligibility / Requirements -->
+      <div class="info-block">
+        <h2>Syarat & Ketentuan Peserta</h2>
+        <ul class="editorial-list">
+          <li><strong>Muslim / Muslimah:</strong> Terbuka untuk umum tanpa batasan usia minimal dewasa.</li>
+          <li><strong>Komitmen Belajar:</strong> Bersedia mengikuti pembelajaran mandiri dan menyelesaikan kuis evaluasi pekanan.</li>
+          <li><strong>Perangkat Akses:</strong> Memiliki ponsel pintar (smartphone) atau laptop yang terhubung ke internet.</li>
+        </ul>
+      </div>
+
+      <!-- Fees / Biaya -->
+      <div class="info-block fee-box">
+        <h2>Biaya Pendidikan</h2>
+        <p class="fee-badge">FREE / INFAQ SUKARELA</p>
+        <p class="fee-desc">
+          Program Belajar Islam Dasar (BID) diselenggarakan sebagai khidmat dakwah dan ilmu. Seluruh modul utama dapat diakses secara gratis. Peserta diberikan kesempatan untuk berinfaq operasional secara sukarela.
+        </p>
+      </div>
+
+      <!-- Registration Steps -->
+      <div class="info-block">
+        <h2>Langkah Pendaftaran</h2>
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h3>Klik Tombol Pendaftaran Resmi</h3>
+              <p>Anda akan diarahkan ke portal pendaftaran resmi Tarbiyah Sunnah Learning.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h3>Isi Formulir Data Diri</h3>
+              <p>Lengkapi profil diri dan pilih angkatan/jadwal kelas yang tersedia.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h3>Konfirmasi & Masuk Grup Belajar</h3>
+              <p>Dapatkan akun portal peserta dan tautan grup pendampingan musyrif via WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary Action CTA -->
+      <div class="cta-box">
+        <h2>Siap Untuk Mulai Belajar?</h2>
+        <p>Pendaftaran angkatan baru sedang dibuka. Dapatkan akses ke portal belajar sekarang.</p>
+        <a 
+          href="https://kelas.tslbelajarislam.id" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn-primary btn-lg"
+          data-track="click_register"
+        >
+          Buka Portal Pendaftaran Resmi →
+        </a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .registration-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-12);
+    padding-block-end: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .registration-hero {
+      padding-block-start: var(--space-20);
+      padding-block-end: var(--space-16);
+    }
+  }
+
+  .hero-title {
+    font-size: clamp(2.125rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    margin-bottom: 0;
+  }
+
+  .registration-body {
+    background-color: var(--color-surface);
+  }
+
+  .info-block {
+    margin-bottom: var(--space-12);
+  }
+
+  .info-block h2 {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    border-bottom: 2px solid var(--color-primary-soft);
+    padding-bottom: var(--space-2);
+  }
+
+  .editorial-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .editorial-list li {
+    position: relative;
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+  }
+
+  .editorial-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .fee-box {
+    background-color: var(--color-background);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .fee-badge {
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
+  }
+
+  .fee-desc {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: var(--line-height-body);
+    margin-bottom: 0;
+  }
+
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .step-item {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    padding: var(--space-4);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .step-content h3 {
+    font-size: var(--font-size-md);
+    color: var(--color-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .step-content p {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    margin-bottom: 0;
+  }
+
+  .cta-box {
+    padding: var(--space-8);
+    background-color: var(--color-primary-soft);
+    border: 1px solid var(--color-border);
+    border-left: 6px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    text-align: left;
+    margin-top: var(--space-12);
+  }
+
+  .cta-box h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .cta-box p {
+    font-size: var(--font-size-md);
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+  }
+
+  .btn-lg {
+    min-height: 52px;
+    font-size: var(--font-size-md);
+    padding-inline: var(--space-8);
+  }
+</style>

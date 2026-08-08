@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FinalCTA from '../../components/home/FinalCTA.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const pageTitle = article.data.seoTitle || `${article.data.title} — BID TSL`;
+const pageDescription = article.data.seoDescription || article.data.summary;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Article Header -->
+  <section class="article-hero section">
+    <div class="container container-reading">
+      <a href="/artikel" class="back-link">← Kembali ke Daftar Artikel</a>
+      
+      <div class="article-meta">
+        <span class="category-tag">{article.data.category}</span>
+        <time datetime={article.data.publishedAt.toISOString()}>
+          {article.data.publishedAt.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      </div>
+
+      <h1 class="article-title">{article.data.title}</h1>
+      
+      <div class="author-box">
+        <span>Ditulis oleh: <strong>{article.data.author}</strong></span>
+        {article.data.reviewedBy && (
+          <span class="reviewer"> | Dimuraja'ah oleh: <strong>{article.data.reviewedBy}</strong></span>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <section class="article-content section">
+    <div class="container container-reading">
+      <div class="prose-lead">
+        <p>{article.data.summary}</p>
+      </div>
+
+      <div class="markdown-body">
+        <Content />
+      </div>
+
+      {article.data.tags && article.data.tags.length > 0 && (
+        <div class="tags-block">
+          <span class="tags-label">Topik Terkait:</span>
+          <div class="tags-list">
+            {article.data.tags.map((tag) => (
+              <span class="tag-item">#{tag}</span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .article-hero {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block-start: var(--space-10);
+    padding-block-end: var(--space-12);
+  }
+
+  .back-link {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-muted);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: var(--space-6);
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--font-size-xs);
+    color: var(--color-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .category-tag {
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .article-title {
+    font-size: clamp(2.125rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+  }
+
+  .author-box {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-3);
+  }
+
+  .article-content {
+    background-color: var(--color-surface);
+  }
+
+  .prose-lead {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-8);
+    padding-left: var(--space-6);
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .tags-block {
+    margin-top: var(--space-12);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-6);
+  }
+
+  .tags-label {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag-item {
+    font-size: var(--font-size-xs);
+    background-color: var(--color-background);
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-muted);
+  }
+</style>
