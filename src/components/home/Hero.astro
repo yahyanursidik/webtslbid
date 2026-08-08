@@ -4,8 +4,15 @@
 <section class="hero-section">
   <div class="container">
     <div class="hero-content">
-      <!-- Eyebrow Tagline -->
-      <span class="eyebrow hero-eyebrow">Tarbiyah Sunnah Learning — Program Belajar Islam Dasar (BID)</span>
+      <!-- Eyebrow Tagline & Badges -->
+      <div class="hero-badges">
+        <span class="eyebrow hero-eyebrow">Tarbiyah Sunnah Learning — Program Belajar Islam Dasar (BID)</span>
+        <span class="badge badge-angkatan">Angkatan 15</span>
+        <span class="badge badge-free">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon-gift"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          100% Gratis
+        </span>
+      </div>
 
       <!-- Main Headline -->
       <h1 class="hero-title">
@@ -14,13 +21,13 @@
 
       <!-- Body Copy -->
       <p class="hero-body">
-        Program Belajar Islam Dasar membantu peserta membangun fondasi pembelajaran Islam melalui materi yang disusun secara sistematis dan dapat diikuti secara bertahap.
+        Program Belajar Islam Dasar (BID) membuka <strong>Pendaftaran Angkatan 15</strong>. Membantu peserta membangun fondasi pembelajaran Islam melalui materi yang disusun secara sistematis, terarah, dan <strong>100% gratis</strong>.
       </p>
 
       <!-- Action Buttons -->
       <div class="hero-actions">
         <a href="https://daftar.tslbelajarislam.id/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-hero">
-          Daftar BID
+          Daftar Angkatan 15 →
         </a>
         <a href="/program/kurikulum" class="btn btn-secondary btn-hero">
           Lihat Kurikulum
@@ -29,13 +36,17 @@
 
       <!-- Institutional Highlights -->
       <div class="hero-highlights">
-        <div class="highlight-item">
-          <span class="highlight-bullet" aria-hidden="true">•</span>
-          <span>Metode Belajar Terstruktur</span>
+        <div class="highlight-item highlight-free">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="highlight-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Program 100% Gratis</span>
         </div>
         <div class="highlight-item">
           <span class="highlight-bullet" aria-hidden="true">•</span>
-          <span>Kurikulum Berjenjang</span>
+          <span>Pendaftaran Angkatan 15</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-bullet" aria-hidden="true">•</span>
+          <span>Metode Belajar Terstruktur</span>
         </div>
         <div class="highlight-item">
           <span class="highlight-bullet" aria-hidden="true">•</span>
@@ -67,8 +78,53 @@
     text-align: left;
   }
 
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full, 9999px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .badge-angkatan {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary-soft);
+  }
+
+  .badge-free {
+    background-color: #E6F4EA;
+    color: #137333;
+    border: 1px solid #CEEAD6;
+  }
+
+  .icon-gift {
+    stroke: #137333;
+  }
+
+  .highlight-free {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .highlight-icon {
+    stroke: var(--color-accent);
+  }
+
   .hero-eyebrow {
-    margin-bottom: var(--space-3);
+    margin-bottom: 0;
   }
 
   .hero-title {
