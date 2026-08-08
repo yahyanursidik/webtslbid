@@ -6,6 +6,7 @@ interface Props {
   canonicalURL?: string | URL;
   type?: 'website' | 'article';
   noindex?: boolean;
+  schemaJson?: object;
 }
 
 const SITE_NAME = 'Tarbiyah Sunnah Learning — Belajar Islam Dasar (BID)';
@@ -18,12 +19,33 @@ const {
   image = DEFAULT_IMAGE,
   canonicalURL = Astro.url,
   type = 'website',
-  noindex = false
+  noindex = false,
+  schemaJson
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 const resolvedCanonical = new URL(canonicalURL, Astro.site || 'https://tslbelajarislam.id').href;
 const resolvedImage = new URL(image, Astro.site || 'https://tslbelajarislam.id').href;
+
+// Base Structured Data (Organization & WebSite)
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  'name': 'Tarbiyah Sunnah Learning',
+  'url': 'https://tslbelajarislam.id',
+  'logo': 'https://tslbelajarislam.id/logo/logo-tsl.png',
+  'sameAs': [
+    'https://instagram.com/tarbiyahsunnahlearning',
+    'https://youtube.com/@tarbiyahsunnahlearning'
+  ]
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'Belajar Islam Dasar',
+  'url': 'https://tslbelajarislam.id'
+};
 ---
 
 <!-- Global Metadata -->
@@ -58,3 +80,8 @@ const resolvedImage = new URL(image, Astro.site || 'https://tslbelajarislam.id')
 <meta property="twitter:title" content={pageTitle} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={resolvedImage} />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{schemaJson && <script type="application/ld+json" set:html={JSON.stringify(schemaJson)} />}

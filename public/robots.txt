@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tslbelajarislam.id/sitemap-index.xml
