@@ -1,18 +1,17 @@
 ---
 scholar: "Imam Asy-Syafi'i"
 arabicName: "الإمام الشافعي"
-quote: "Barangsiapa yang ingin Allah bukakan hatinya atau meneranginya, hendaknya ia berkhalwat, sedikit makan, meninggalkan pergaulan dengan orang-orang bodoh, dan membenci orang-orang berilmu yang tidak memiliki keadilan dan adab."
-arabicText: "مَنْ أَحَبَّ أَنْ يَفْتَحَ اللَّهُ قَلْبَهُ أَوْ يُنَوِّرَهُ فَلْيَدَعِ الْكَلامَ فِيمَا لا يَعْنِيهِ"
-sourceTitle: "Manaqib Asy-Syafi'i"
-sourceDetail: "Karya Al-Baihaqi (2/171)"
+quote: "Barangsiapa yang tidak merasakan pahitnya belajar walau sejenak, ia akan meneguk hinanya kebodohan sepanjang hidupnya."
+arabicText: "مَنْ لَمْ يَذُقْ مُرَّ التَّعَلُّمِ سَاعَةً، تَجَرَّعَ ذُلَّ الْجَهْلِ طُولَ حَيَاتِهِ"
+sourceTitle: "Diwan Asy-Syafi'i"
+sourceDetail: "Kutipan hikmah keutamaan menuntut ilmu"
 themes:
   - "menuntut-ilmu"
-  - "adab"
-  - "keikhlasan"
+  - "keutamaan-ilmu"
 verified: true
-reviewedBy: "Tim Tim Editorial TSL"
-reviewedAt: "2026-01-15"
+reviewedBy: "Tim Editorial TSL"
+reviewedAt: "2026-02-01"
 status: "published"
 ---
 
-Verified scholar quote for educational context.
+Nasihat Imam Asy-Syafi'i mengenai pentingnya kesabaran dan ketekunan dalam menuntut ilmu syar'i.
