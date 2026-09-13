@@ -1,0 +1,253 @@
+---
+const levelOne = [
+  { stage: 'Adab & manhaj', modules: ['Kendala Menuntut Ilmu (1–2) — Awaiq ath-Thullab'] },
+  { stage: 'Akidah & tauhid', modules: ['Al-Ushul ats-Tsalatsah', 'Kitab at-Tauhid (1–3)', 'Ushul as-Sunnah al-Humaidi'] },
+  { stage: 'Tazkiyah', modules: ['Fawaid at-Taqwa'] },
+  { stage: 'Fikih ibadah', modules: ['Manhaj as-Salikin: Thaharah', 'Manhaj as-Salikin: Shalat (1–2)'] },
+];
+
+const levelTwo = [
+  { stage: 'Bahasa Arab', modules: ["Al-Muyassar fi 'Ilmi an-Nahwi (1–2)", "Al-Kafi fi 'Ilmi ash-Sharfi"] },
+  { stage: 'Hadis dan ilmunya', modules: ["Al-Arba'in an-Nawawi", 'Manzhumah al-Baiquniyah'] },
+  { stage: 'Ushul & kaidah fikih', modules: ['Al-Waraqat (1–2)', "Manzhumah al-Qawa'id al-Fiqhiyyah"] },
+  { stage: 'Fikih mazhab', modules: ['Akhshar al-Mukhtasharat: Thaharah dan Shalat (Hanbali)'] },
+];
+
+const pillars = [
+  ['Niat & komitmen', 'Meluruskan niat karena Allah dan berkomitmen menuntaskan program.'],
+  ['Konsistensi', 'Menetapkan ritme simakan dan belajar yang dapat dijaga.'],
+  ['Bertahap', 'Mengikuti urutan materi dan prasyarat tanpa melompati tahapan.'],
+  ['Pengulangan', 'Mengulang simakan dan catatan agar pemahaman lebih melekat.'],
+  ['Tuntas & mendalam', 'Materi dinyatakan selesai setelah evaluasinya lulus.'],
+  ['Pendampingan', 'Memanfaatkan tanya jawab dan sesi live opsional bersama pembimbing.'],
+];
+
+const evaluation = [
+  ['Evaluasi materi', 'Wajib pada setiap materi sebagai syarat melanjutkan ke materi berikutnya.'],
+  ['Penguatan tahap', 'Quiz ringan setelah satu tahap selesai.'],
+  ['Evaluasi akhir level', 'Tes komprehensif sesudah seluruh tahap dalam satu level tuntas.'],
+  ['Evaluasi akhir program', 'Tes komprehensif dan refleksi pembelajaran.'],
+  ['Syahadah', 'Diterbitkan setelah seluruh komponen wajib dinyatakan lulus.'],
+];
+---
+
+<section class="bid-hero" aria-labelledby="hero-title">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Tarbiyah Sunnah Learning · Program BID</p>
+      <h1 id="hero-title">Gerbang awal menuntut ilmu syar'i, ditempuh setapak demi setapak.</h1>
+      <p class="lead">Pembelajaran daring non-formal yang menuntun setiap muslim memahami dasar Islam berdasarkan Al-Qur'an dan Sunnah menurut pemahaman salaf—mandiri dalam ritme, namun tertata dalam alur.</p>
+      <div class="hero-actions">
+        <a href="https://my.tsls.my.id/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Daftar Angkatan Berikutnya</a>
+        <a href="#alur" class="btn btn-secondary">Lihat Alur Belajar</a>
+      </div>
+    </div>
+    <p class="hero-meta">2 Level · 8 Tahap · 20 Materi</p>
+  </div>
+</section>
+
+<section class="program-intro section" id="program" aria-labelledby="about-title">
+  <div class="container intro-grid">
+    <div>
+      <p class="eyebrow">Tentang program</p>
+      <h2 id="about-title">Belajar mandiri yang tetap terarah.</h2>
+    </div>
+    <div class="intro-copy">
+      <p>Belajar Islam Dasar (BID) adalah pembelajaran daring dari Tarbiyah Sunnah Learning untuk memberi pemahaman dasar ajaran Islam. Pendekatannya adalah <strong>guided self-paced learning</strong>: peserta mengikuti ritmenya sendiri, tetapi tetap berada dalam alur pembelajaran yang telah ditentukan.</p>
+      <p>Program ini menjadi pintu awal untuk menuntut ilmu syar'i dan mempersiapkan peserta melanjutkan ke jenjang pembelajaran berikutnya.</p>
+    </div>
+  </div>
+  <div class="container eligibility-grid">
+    <div>
+      <h3>Tujuan program</h3>
+      <ul class="editorial-list">
+        <li>Memahami dasar ajaran Islam secara benar.</li>
+        <li>Memahami konsep dasar ibadah sehari-hari.</li>
+        <li>Membiasakan proses belajar mandiri yang terarah.</li>
+        <li>Menyiapkan langkah ke jenjang pembelajaran berikutnya.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Siapa yang dapat mengikuti?</h3>
+      <ul class="editorial-list">
+        <li>Muslim yang berniat menuntut ilmu karena Allah.</li>
+        <li>Mampu membaca huruf latin dan berbahasa Indonesia.</li>
+        <li>Memiliki perangkat serta akses internet untuk LMS.</li>
+        <li>Bersedia mengikuti alur dan meluangkan waktu belajar rutin.</li>
+        <li>Bahasa Arab tidak menjadi syarat awal; dipelajari pada Level 2.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="mulazamah-section section" id="sistem" aria-labelledby="mulazamah-title">
+  <div class="container reading-head">
+    <p class="eyebrow">Sistem belajar · mulazamah</p>
+    <h2 id="mulazamah-title">Menetapi alur sampai pemahaman bertumbuh.</h2>
+    <p class="lead"><strong>Mulazamah</strong> berarti menetapi dan menyertai secara terus-menerus: belajar dengan kesungguhan, keteraturan, dan kesinambungan sampai ilmu benar-benar dikuasai.</p>
+  </div>
+  <div class="container pillar-list">
+    {pillars.map(([title, description], index) => (
+      <article class="pillar">
+        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <div><h3>{title}</h3><p>{description}</p></div>
+      </article>
+    ))}
+  </div>
+  <div class="container reading-note">
+    <p>Ritme belajar dapat disesuaikan—santai, standar, atau intensif. Peserta dapat menjalani hingga tiga materi sekaligus, sedangkan materi berseri tetap dipelajari secara berurutan.</p>
+  </div>
+</section>
+
+<section class="curriculum-section section" id="alur" aria-labelledby="curriculum-title">
+  <div class="container reading-head">
+    <p class="eyebrow">Kurikulum · tadarruj</p>
+    <h2 id="curriculum-title">Alur pembelajaran dari fondasi menuju pendalaman.</h2>
+    <p class="lead">Materi disusun dengan prinsip <strong>tadarruj</strong>: keyakinan dan adab dibenahi lebih dahulu, lalu ilmu pendukung dan pendalaman dibangun secara bertahap.</p>
+  </div>
+  <div class="container levels">
+    <article class="level level-one">
+      <header><span>Level 1</span><h3>Dasar</h3><p>Membentuk pemahaman dasar Islam yang benar.</p></header>
+      <div class="stage-list">
+        {levelOne.map((item, index) => <details open={index === 0}><summary><span>Tahap {String.fromCharCode(65 + index)}</span>{item.stage}</summary><ul>{item.modules.map((module) => <li>{module}</li>)}</ul></details>)}
+      </div>
+      <p class="level-close">Ditutup Evaluasi Akhir Level 1 sebagai syarat menuju Level 2.</p>
+    </article>
+    <article class="level level-two">
+      <header><span>Level 2</span><h3>Pendalaman</h3><p>Pendalaman dasar-dasar ilmu dan bahasa Arab.</p></header>
+      <div class="stage-list">
+        {levelTwo.map((item, index) => <details><summary><span>Tahap {String.fromCharCode(65 + index)}</span>{item.stage}</summary><ul>{item.modules.map((module) => <li>{module}</li>)}</ul></details>)}
+      </div>
+      <p class="level-close">Ditutup Evaluasi Akhir Program: tes komprehensif dan refleksi pembelajaran.</p>
+    </article>
+  </div>
+  <div class="container curriculum-link"><a href="/program/kurikulum" class="link-editorial">Lihat kurikulum dan silabus selengkapnya <span aria-hidden="true">→</span></a></div>
+</section>
+
+<section class="assessment-section section" id="evaluasi" aria-labelledby="assessment-title">
+  <div class="container assessment-grid">
+    <div class="assessment-intro">
+      <p class="eyebrow">Evaluasi & kelulusan</p>
+      <h2 id="assessment-title">Memastikan pemahaman, bukan sekadar mengejar angka.</h2>
+      <p>Setiap materi dinilai berdiri sendiri. Nilai minimal kelulusan adalah <strong>70</strong> untuk tiap materi dan tes komprehensif.</p>
+      <p class="kkm">KKM <strong>70</strong></p>
+    </div>
+    <ol class="evaluation-list">
+      {evaluation.map(([title, description], index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{description}</p></div></li>)}
+    </ol>
+  </div>
+  <div class="container competency-grid">
+    <p><strong>Pemahaman</strong><span>Penentu utama kelulusan pada setiap materi dan tes komprehensif.</span></p>
+    <p><strong>Sikap & adab</strong><span>Niat, adab terhadap ilmu dan pembimbing, serta ketertiban menjalani alur.</span></p>
+    <p><strong>Keterampilan</strong><span>Kemandirian menggunakan media belajar, mencatat, dan hafalan bila ditargetkan.</span></p>
+  </div>
+</section>
+
+<section class="calendar-section section" id="kalender" aria-labelledby="calendar-title">
+  <div class="container calendar-grid">
+    <div>
+      <p class="eyebrow">Kalender pendidikan</p>
+      <h2 id="calendar-title">Angkatan baru dibuka setiap empat bulan.</h2>
+      <p>Angkatan mengikuti pola Januari · Mei · September dan berjalan selama enam bulan. Tumpang tindih antarangkatan memberi calon peserta kesempatan mendaftar tanpa menunggu lama.</p>
+    </div>
+    <div class="calendar-timeline">
+      <article><span>Bulan 1–3</span><h3>Level 1</h3><p>Adab dan manhaj, akidah dan tauhid, tazkiyah, serta fikih ibadah. Diakhiri Evaluasi Akhir Level 1.</p></article>
+      <article><span>Bulan 4–6</span><h3>Level 2</h3><p>Bahasa Arab, hadis, ushul dan kaidah fikih, serta fikih mazhab. Diakhiri Evaluasi Akhir Program.</p></article>
+    </div>
+  </div>
+  <div class="container calendar-note"><p>Tersedia masa remedial dan tenggang pada akhir angkatan, serta jeda yang menyesuaikan Ramadhan dan hari raya.</p></div>
+</section>
+
+<section class="teachers-section section" id="pengajar" aria-labelledby="teachers-title">
+  <div class="container teachers-grid">
+    <div><p class="eyebrow">Pengajar</p><h2 id="teachers-title">Dibimbing asatidzah pada setiap tahap belajar.</h2></div>
+    <div class="teacher-groups">
+      <article><h3>Level 1 · Dasar</h3><p>Ustadz Abu Haidar As-Sundawiy, Ustadz Sigit Santoso, Ustadz Mohamad Toriqul Huda, Ustadz Abu Umar, Ustadz Iskandar Dinata, dan Ustadz Faqih Aristo.</p></article>
+      <article><h3>Level 2 · Pendalaman</h3><p>Ustadz Cecep Abu Rozan, Ustadz Fandi Kasbara Harahap, Ustadz Sigit Santoso, Ustadz Mohamad Toriqul Huda, Ustadz Mundzir Abu Ibrahim, Ustadz Iskandar Dinata, Ustadz Faqih Aristo, dan Ustadz Harry Ramadhan Sinaga.</p></article>
+      <a href="/pengajar" class="link-editorial">Lihat halaman pengajar <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="terms-section section" aria-labelledby="terms-title">
+  <div class="container"><p class="eyebrow">Istilah penting</p><h2 id="terms-title">Beberapa istilah yang akan ditemui selama belajar.</h2></div>
+  <dl class="container terms-list">
+    <div><dt>Guided self-paced</dt><dd>Belajar mandiri yang fleksibel, tetapi tetap terarah dalam alur yang ditentukan.</dd></div>
+    <div><dt>Tadarruj</dt><dd>Prinsip belajar bertahap, dari yang mendasar menuju yang lebih tinggi.</dd></div>
+    <div><dt>Itqan</dt><dd>Menguasai materi secara tuntas sebelum berpindah ke materi berikutnya.</dd></div>
+    <div><dt>Syahadah</dt><dd>Tanda kelulusan setelah seluruh komponen wajib program diselesaikan.</dd></div>
+  </dl>
+</section>
+
+<section class="final-cta" aria-labelledby="final-title">
+  <div class="container final-cta-inner">
+    <div><p class="eyebrow">Langkah berikutnya</p><h2 id="final-title">Siap menetapi langkah pertama?</h2><p>Angkatan baru dibuka setiap empat bulan. Mulailah dari materi pertama di Level 1.</p></div>
+    <a href="https://my.tsls.my.id/" target="_blank" rel="noopener noreferrer" class="btn btn-accent">Daftar Sekarang</a>
+  </div>
+</section>
+
+<style>
+  .bid-hero { background: var(--color-background); padding-block: var(--space-16); }
+  .hero-grid, .intro-grid, .assessment-grid, .calendar-grid, .teachers-grid { display: grid; gap: var(--space-10); grid-template-columns: minmax(0, 1fr); }
+  .hero-copy { max-width: var(--max-width-reading); }
+  .hero-copy h1 { font-size: clamp(2.25rem, 4.5vw, 3.1rem); max-width: 20ch; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+  .hero-meta { color: var(--color-primary); font-size: var(--font-size-sm); font-weight: 700; letter-spacing: 0.04em; margin: var(--space-10) 0 0; }
+  .program-intro, .mulazamah-section, .curriculum-section, .assessment-section, .calendar-section, .teachers-section, .terms-section { background: var(--color-background); border-top: var(--rule-hair) solid var(--color-border); }
+  .intro-grid > div:first-child, .assessment-intro, .calendar-grid > div:first-child, .teachers-grid > div:first-child { max-width: 32rem; }
+  .intro-copy { max-width: var(--max-width-reading); }
+  .eligibility-grid { border-top: var(--rule-hair) solid var(--color-border); display: grid; gap: var(--space-8); grid-template-columns: minmax(0, 1fr); margin-top: var(--space-16); padding-top: var(--space-8); }
+  .editorial-list { color: var(--color-muted); display: grid; gap: var(--space-3); list-style: none; }
+  .editorial-list li { border-bottom: var(--rule-hair) solid var(--color-border); padding-bottom: var(--space-3); }
+  .editorial-list li::before { color: var(--color-accent); content: '—'; font-weight: 700; margin-right: var(--space-2); }
+  .reading-head { max-width: var(--max-width-reading); }
+  .pillar-list { border-top: var(--rule-hair) solid var(--color-border-strong); display: grid; margin-top: var(--space-12); }
+  .pillar { border-bottom: var(--rule-hair) solid var(--color-border); display: grid; gap: var(--space-5); grid-template-columns: 2.4rem minmax(0, 1fr); padding-block: var(--space-5); }
+  .pillar > span, .evaluation-list > li > span { color: var(--color-accent); font-family: var(--font-serif); font-size: var(--font-size-xl); font-weight: 600; }
+  .pillar p, .evaluation-list p { color: var(--color-muted); margin: 0; }
+  .reading-note { margin-top: var(--space-8); max-width: var(--max-width-reading); }
+  .reading-note p { border-left: 2px solid var(--color-accent); padding-left: var(--space-4); }
+  .levels { display: grid; gap: var(--space-6); margin-top: var(--space-12); }
+  .level { border-top: 3px solid var(--color-primary); padding-top: var(--space-5); }
+  .level-two { border-top-color: var(--color-accent); }
+  .level header > span, .calendar-timeline span { color: var(--color-primary); font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .level header h3 { font-family: var(--font-serif); font-size: var(--font-size-2xl); margin-top: var(--space-1); }
+  .level header p, .level-close { color: var(--color-muted); font-size: var(--font-size-sm); }
+  .stage-list { margin-top: var(--space-5); }
+  .stage-list details { border-bottom: var(--rule-hair) solid var(--color-border); }
+  .stage-list summary { align-items: baseline; color: var(--color-text); cursor: pointer; display: flex; font-size: var(--font-size-base); font-weight: 700; gap: var(--space-3); list-style: none; min-height: var(--touch-target-min); padding-block: var(--space-3); }
+  .stage-list summary::-webkit-details-marker { display: none; }
+  .stage-list summary::after { color: var(--color-primary); content: '+'; font-size: var(--font-size-xl); margin-left: auto; }
+  .stage-list details[open] summary::after { content: '−'; }
+  .stage-list summary span { color: var(--color-accent); font-size: var(--font-size-xs); letter-spacing: 0.06em; text-transform: uppercase; }
+  .stage-list ul { color: var(--color-muted); display: grid; gap: var(--space-2); list-style: disc; margin: 0 0 var(--space-4) var(--space-5); }
+  .level-close { border-left: 2px solid var(--color-accent); margin-top: var(--space-5); padding-left: var(--space-3); }
+  .curriculum-link { margin-top: var(--space-10); }
+  .evaluation-list { border-top: var(--rule-hair) solid var(--color-border-strong); counter-reset: item; }
+  .evaluation-list > li { border-bottom: var(--rule-hair) solid var(--color-border); display: grid; gap: var(--space-4); grid-template-columns: 2.4rem minmax(0, 1fr); padding-block: var(--space-5); }
+  .kkm { color: var(--color-primary); font-family: var(--font-serif); font-size: var(--font-size-xl); margin-top: var(--space-6); }
+  .competency-grid { border-top: var(--rule-hair) solid var(--color-border); display: grid; gap: var(--space-5); grid-template-columns: minmax(0, 1fr); margin-top: var(--space-12); padding-top: var(--space-6); }
+  .competency-grid p { display: grid; gap: var(--space-2); margin: 0; }
+  .competency-grid span { color: var(--color-muted); font-size: var(--font-size-sm); }
+  .calendar-timeline { border-top: var(--rule-hair) solid var(--color-border-strong); }
+  .calendar-timeline article { border-bottom: var(--rule-hair) solid var(--color-border); padding-block: var(--space-5); }
+  .calendar-timeline h3 { font-family: var(--font-serif); font-size: var(--font-size-2xl); margin-top: var(--space-2); }
+  .calendar-timeline p, .calendar-note p { color: var(--color-muted); margin: 0; }
+  .calendar-note { border-top: var(--rule-hair) solid var(--color-border); margin-top: var(--space-10); padding-top: var(--space-4); }
+  .teacher-groups { display: grid; gap: var(--space-6); }
+  .teacher-groups article { border-top: var(--rule-hair) solid var(--color-border-strong); padding-top: var(--space-4); }
+  .teacher-groups p { color: var(--color-muted); }
+  .terms-list { display: grid; gap: var(--space-6); grid-template-columns: minmax(0, 1fr); margin-top: var(--space-10); }
+  .terms-list > div { border-top: var(--rule-hair) solid var(--color-border-strong); padding-top: var(--space-4); }
+  .terms-list dt { color: var(--color-primary); font-family: var(--font-serif); font-size: var(--font-size-xl); font-weight: 600; }
+  .terms-list dd { color: var(--color-muted); margin: var(--space-2) 0 0; }
+  .final-cta { background: var(--color-primary); color: var(--color-surface); padding-block: var(--space-16); }
+  .final-cta-inner { align-items: end; display: grid; gap: var(--space-8); grid-template-columns: minmax(0, 1fr); }
+  .final-cta .eyebrow { color: var(--color-accent); }
+  .final-cta h2, .final-cta p { color: var(--color-surface); }
+  .final-cta p { color: var(--color-primary-soft); margin-bottom: 0; max-width: 38rem; }
+  .final-cta .btn { justify-self: start; }
+  .bid-hero .container, .program-intro > .container, .mulazamah-section > .container, .curriculum-section > .container, .assessment-section > .container, .calendar-section > .container, .teachers-section > .container, .terms-section > .container, .final-cta > .container { max-width: var(--max-width-reading); }
+  @media (min-width: 48rem) { .eligibility-grid, .competency-grid, .terms-list { grid-template-columns: minmax(0, 1fr); } }
+  @media (min-width: 60rem) { .bid-hero { padding-block: var(--space-20); } .hero-grid, .intro-grid, .assessment-grid, .calendar-grid, .teachers-grid, .levels, .competency-grid, .final-cta-inner { grid-template-columns: minmax(0, 1fr); } .final-cta .btn { justify-self: start; } }
+</style>

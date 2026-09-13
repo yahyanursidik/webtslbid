@@ -1,71 +1,27 @@
-/* Typography Base Styles */
-
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  line-height: var(--line-height-heading);
   color: var(--color-text);
-  letter-spacing: -0.01em;
+  font-style: normal;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-h1 {
-  font-size: clamp(var(--font-size-3xl), 4vw, var(--font-size-5xl));
-  margin-bottom: var(--space-6);
-}
-
-h2 {
-  font-size: clamp(var(--font-size-2xl), 3vw, var(--font-size-3xl));
-  margin-bottom: var(--space-4);
-}
-
-h3 {
-  font-size: clamp(var(--font-size-xl), 2.5vw, var(--font-size-2xl));
-  margin-bottom: var(--space-3);
-}
-
-h4 {
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--space-2);
-}
-
-p {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-body);
-  color: var(--color-text);
-  margin-bottom: var(--space-4);
-}
-
-p.lead {
-  font-size: clamp(var(--font-size-md), 1.5vw, var(--font-size-lg));
-  color: var(--color-muted);
-  line-height: var(--line-height-relaxed);
-}
-
-.text-editorial {
+h1, h2 {
   font-family: var(--font-serif);
-}
-
-.text-arabic {
-  font-family: var(--font-arabic);
-  font-size: 1.25em;
-  line-height: 1.8;
-  direction: rtl;
-}
-
-.text-muted {
-  color: var(--color-muted);
-}
-
-.text-small {
-  font-size: var(--font-size-sm);
-}
-
-.eyebrow {
-  font-size: var(--font-size-xs);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-primary);
-  display: inline-block;
-  margin-bottom: var(--space-2);
+  letter-spacing: -0.025em;
+  line-height: var(--line-height-heading);
 }
+
+h1 { font-size: var(--text-display); margin-bottom: var(--space-6); }
+h2 { font-size: clamp(var(--font-size-2xl), 3.2vw, var(--font-size-4xl)); margin-bottom: var(--space-4); }
+h3, h4 { font-family: var(--font-sans); font-weight: 700; line-height: 1.25; }
+h3 { font-size: var(--font-size-lg); margin-bottom: var(--space-2); }
+h4 { font-size: var(--font-size-base); margin-bottom: var(--space-2); }
+
+p { color: var(--color-text); font-size: var(--font-size-base); line-height: var(--line-height-body); margin-bottom: var(--space-4); }
+p.lead { color: var(--color-muted); font-size: clamp(var(--font-size-md), 1.5vw, var(--font-size-lg)); line-height: var(--line-height-relaxed); }
+.text-editorial { font-family: var(--font-serif); }
+.text-arabic { direction: rtl; font-family: var(--font-arabic); font-size: 1.25em; line-height: 1.8; }
+.text-muted { color: var(--color-muted); }
+.text-small { font-size: var(--font-size-sm); }
+.eyebrow { color: var(--color-primary); display: inline-block; font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.09em; margin-bottom: var(--space-3); text-transform: uppercase; }
