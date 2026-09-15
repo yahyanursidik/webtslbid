@@ -31,7 +31,7 @@ Program Belajar Islam Dasar mencakup 6 modul/mata pelajaran utama:
 ## 🔗 Tautan Eksternal & Portal Resmi
 
 - **Portal Belajar / Login Akun**: [https://my.tslbelajarislam.id/account/login](https://my.tslbelajarislam.id/account/login)
-- **Portal Pendaftaran Official**: [https://daftar.tslbelajarislam.id/](https://daftar.tslbelajarislam.id/)
+- **Portal Pendaftaran Official**: [https://my.tsl.my.id/daftar/BID226](https://my.tsl.my.id/daftar/BID226)
 - **Website Production**: [https://tslbelajarislam.id](https://tslbelajarislam.id)
 
 ---
@@ -97,7 +97,7 @@ npm run preview
 ### Version 1.0.0 (2026-08-08) — Initial Official Release
 - **Kurikulum**: Implementasi 6 modul utama BID (Aqidah, Manhaj, Fiqih & Ushul Fiqih, Qawaid Fiqhiyyah, Hadits & Musthalah Hadits, Bahasa Arab Nahwu & Shorof).
 - **Branding**: Integrasi logo resmi Belajar Islam Dasar (BID) dan favicon PNG pada seluruh shell website.
-- **Portals**: Pembaharuan URL Portal Belajar (`https://my.tslbelajarislam.id/account/login`) dan Portal Pendaftaran (`https://daftar.tslbelajarislam.id/`).
+- **Portals**: Pembaharuan URL Portal Belajar (`https://my.tslbelajarislam.id/account/login`) dan Portal Pendaftaran (`https://my.tsl.my.id/daftar/BID226`).
 - **Pembersihan**: Penghapusan rute halaman informasi dan pembaruan struktur navigasi.
 - **Production Readiness**: Audit WCAG 2.2 AA accessibility, Core Web Vitals performance optimization, dan penyesuaian `netlify.toml` untuk Astro 7.2.0 (Node 22.12.0).
 
